@@ -1,0 +1,29 @@
+
+
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="main">
+    <h2>Tip Tracker</h2>
+    <div class="form-content">
+      <div class="form-header" style="margin-bottom: 10px;">
+        <a class="date-arrow" href="/?date={{ previous_date|date:"Y-m-d" }}" style="text-decoration: none; margin-right: 20px;">&lt;</a>
+        <span class="date-title-form">{{ selected_date|date:"F j" }}</span>
+        <a class="date-arrow" href="/?date={{ next_date|date:"Y-m-d" }}" style="text-decoration: none; margin-left: 20px;">&gt;</a>
+      </div>
+      <ul>
+        {% for tip in tips %}
+          <li class="listed-tip">${{ tip.amount }} - {{ tip.get_shift_type_display }}</li>
+        {% endfor %}
+      </ul>
+      <form method="post" style="margin-top: 10px;">
+        {% csrf_token %}
+        <input type="hidden" name="selected_date" value="{{ selected_date|date:"Y-m-d" }}">
+        {{ form.as_p }}
+        <button type="submit">Add Tip</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="calendar-container">
+    <div class="calendar-header">
+        <div class="calendar-navigation">
+            <a href="?year={% if month == 1 %}{{ year|add:"-1" }}{% else %}{{ year }}{% endif %}&month={% if month == 1 %}12{% else %}{{ month|add:"-1" }}{% endif %}" class="nav-arrow">&#9664;</a>
+            <span class="month-year">{{ month_name }} {{ year }}</span>
+            <a href="?year={% if month == 12 %}{{ year|add:"1" }}{% else %}{{ year }}{% endif %}&month={% if month == 12 %}1{% else %}{{ month|add:"1" }}{% endif %}" class="nav-arrow">&#9654;</a>
+        </div>
+    </div>
+    <div class="calendar">
+        <div class="calendar-grid">
+            <div class="day-name">S</div>
+            <div class="day-name">M</div>
+            <div class="day-name">T</div>
+            <div class="day-name">W</div>
+            <div class="day-name">T</div>
+            <div class="day-name">F</div>
+            <div class="day-name">S</div>
+            {% for week in calendar_data %}
+                {% for day in week %}
+                    {% if day %}
+                        <div class="day{% if day.total_tips > 0 %} positive{% else %} negative{% endif %}">
+                            <span class="date">{{ day.day }}</span>
+                            <span class="tips">${{ day.total_tips }}</span>
+                        </div>
+                    {% else %}
+                        <div class="day empty"></div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+
+</style>

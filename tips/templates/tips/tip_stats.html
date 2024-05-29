@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div style="text-align: center; margin-top: 20px;">
+    <h2>Tip Stats</h2>
+    <div style="display: inline-block; text-align: center; border: 1px solid #ccc; padding: 20px; border-radius: 5px; max-width: 600px;">
+      <p><strong>Total Tips:</strong> ${{ total_tips }}</p>
+      <p><strong>Average Tips per Hour:</strong> ${{ average_tips_per_hour|floatformat:2 }}</p>
+      <p><strong>Average Tips per Day:</strong> ${{ average_tips_per_day|floatformat:2 }}</p>
+
+      <h3>Average Tips per Day by Shift</h3>
+      <ul>
+        {% for shift, avg in average_tips_per_day_by_shift.items %}
+          <li>{{ shift|title }}: ${{ avg|floatformat:2 }}</li>
+        {% endfor %}
+      </ul>
+
+      <h3>Average Tips per Hour by Shift</h3>
+      <ul>
+        {% for shift, avg in average_tips_per_hour_by_shift.items %}
+          <li>{{ shift|title }}: ${{ avg|floatformat:2 }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

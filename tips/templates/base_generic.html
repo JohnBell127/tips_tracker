@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Tip Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'tips/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'tip_list' %}">Home</a></li>
+                <li><a href="{% url 'tip_stats' %}">Stats</a></li>
+                <li><a href="{% url 'tip_calendar' %}">Calendar</a></li>
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
